@@ -1,6 +1,8 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import Utils.InnputManger;
 import vo.User;
@@ -45,6 +47,29 @@ public class UserDAO {
 		}
 		
 		return userList.get(idx);
+	}// 패턴 아이디
+	private boolean idpattern(String id) {
+		String idPatter = "^[a-z]{1}[a-z0-9]{5,10}$";
+		Pattern p = Pattern.compile(idPatter);
+		Matcher m = p.matcher(id);
+		if(m.matches()) {
+			System.out.println("id 맞는 표현입니다.");
+			return true;
+		}
+		System.out.println("id 틀린표현 표현입니다.");
+		return false;
+	}
+	// 패턴 비밀번호
+	private boolean pwpattern(String pw) {
+		String pwPatter = "^[a-z0-9]{4,10}$";
+		Pattern p = Pattern.compile(pwPatter);
+		Matcher m = p.matcher(pw);
+		if(m.matches()) {
+			System.out.println("pw 맞는 표현입니다.");
+			return true;
+		}
+		System.out.println("pw 틀린표현 표현입니다.");
+		return false;
 	}
 	//가입 및 유저관리 유저 추가
 	public void userJoin() {
@@ -54,7 +79,13 @@ public class UserDAO {
 			System.out.println("중복된 아이디입니다.");
 			return;
 		}
+		if(!idpattern(id)) {
+			return;
+		}
 		String pw = InnputManger.getValueString("비밀번호 입력 : ");
+		if(!pwpattern(pw)) {
+			return;
+		}
 		String name = InnputManger.getValueString("이름 입력 : ");
 		
 		userList.add(new User(id,pw,name));
