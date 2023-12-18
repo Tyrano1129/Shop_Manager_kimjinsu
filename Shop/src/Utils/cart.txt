@@ -1,0 +1,13 @@
+test1/포도
+test1/사과
+test1/바나나
+test1/도미
+test1/광어
+test3/도미
+test3/광어
+test3/도미
+test3/광어
+test2/코카콜라
+test2/사과주스
+test2/제로콜라
+test5/사과주스
